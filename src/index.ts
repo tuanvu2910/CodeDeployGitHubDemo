@@ -14,7 +14,7 @@ app.use(express.json())
 app.use(express.urlencoded())
 
 app.get('/', (req:any,res:any)=>{
-	    res.json({msg:'deploy thanh cong rồi '})
+	    res.json({msg:'mai ma build deploy thanh cong rồi '})
 })
 
 
