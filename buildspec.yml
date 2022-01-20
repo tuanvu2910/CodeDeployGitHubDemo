@@ -1,0 +1,24 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+  pre_build:
+    on-failure: ABORT
+    commands:
+      - echo start build
+  build:
+    on-failure: ABORT
+    commands:
+      - echo Build started on `date`
+      - echo Compiling the dist folder
+      - docker build -t ${CONTAINER_NAME}  . -f ./Dockerfile
+  post_build:
+    commands:
+      - docker save ${CONTAINER_NAME} | gzip > ${APP_NAME}.docker.tar.gz
+      - echo Build completed on `date`
+# Include only the files required for your application to run.
+artifacts:
+  files:
+  - ${APP_NAME}.docker.tar.gz
+   
